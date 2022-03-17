@@ -172,6 +172,10 @@ class Parser implements ParserInterface
             // we are at the end of the file
             return TagDTO::makeFromPrimitives();
         }
+        if ($content->char() == ' ') {
+            $content->fastForward(1);
+            return TagDTO::makeFromPrimitives(true);
+        }
         if ($content->char() == '/') {
             return $this->makeEndTag($content, $options);
         }
